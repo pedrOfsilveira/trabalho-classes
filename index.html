@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trabalho Classes</title>
+</head>
+
+<body>
+
+  <button id="turma1"> Imprimir turma 1 </button>
+  <button id="turma2"> Imprimir turma 2 </button>
+  <div id="imprimir"></div>
+  
+  <script>
+    document.querySelector('#turma1').addEventListener('click', () => turma1.imprimeDados());
+    document.querySelector('#turma2').addEventListener('click', () => turma2.imprimeDados());
+
+    class pessoa {
+      constructor(cpf, nome) {
+        this.cpf = cpf;
+        this.nome = nome;
+      }
+    }
+
+    class professor extends pessoa {
+      constructor(cpf, nome, area, telefone) {
+        super(cpf, nome);
+        this.area = area;
+        this.telefone = telefone;
+      }
+    }
+
+    class aluno extends pessoa {
+      constructor(cpf, nome, matricula) {
+        super(cpf, nome);
+        this.matricula = matricula;
+      }
+    }
+
+    class turma {
+      constructor(professor, alunos, identificacao) {
+        this.professor = professor;
+        this.alunos = alunos;
+        this.identificacao = identificacao;
+      }
+
+      imprimeDados() {
+        let imprimir = `Turma ${this.identificacao}<br>`;
+        imprimir += `Professor: ${this.professor.nome}; Área: ${this.professor.area}<br>`;
+        imprimir += 'Alunos: <ul>';
+        for (let i = 0; i < this.alunos.length; i++) {
+          imprimir += `<li>${this.alunos[i].nome}</li>`;
+        }
+        imprimir += '</ul>';
+        document.getElementById('imprimir').innerHTML = imprimir;
+      }
+    }
+
+    let professor1 = new professor("05725171060", "Pedro Silveira", "Biologia", "53 999535431");
+    let professor2 = new professor("88144488091", "Cátia Ferreira", "Português", "53 991925890");
+
+    let aluno1 = new aluno("01234567890", "Fernandinho", "2022300785");
+    let aluno2 = new aluno("22222222222", "César", "202330450");
+    let aluno3 = new aluno("33333333333", "Carmem", "2022300800");
+    let aluno4 = new aluno("44444444444", "Amanda", "202330780");
+    let aluno5 = new aluno("55555555555", "Lucas", "202230756");
+    let aluno6 = new aluno("66666666666", "Thaissa", "2022300858");
+
+    let turma1 = new turma(professor1, [aluno1, aluno2, aluno3, aluno4], "Turma de Biologia");
+    let turma2 = new turma(professor2, [aluno3, aluno4, aluno5, aluno6], "Turma de Português");
+  </script>
+</body>
+
+</html>
